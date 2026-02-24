@@ -1416,6 +1416,13 @@ func TestUnmarshalHostPort(t *testing.T) {
 			in:  `"localhost:"`,
 			err: true,
 		},
+		{
+			in:  `"[fd12:3456:789a::1]:25"`,
+			exp: HostPort{Host: "fd12:3456:789a::1", Port: "25"},
+			yamlOut: `'[fd12:3456:789a::1]:25'
+`,
+			jsonOut: `"[fd12:3456:789a::1]:25"`,
+		},
 	} {
 		t.Run(tc.in, func(t *testing.T) {
 			hp := HostPort{}
